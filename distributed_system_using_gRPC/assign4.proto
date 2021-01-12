@@ -1,0 +1,20 @@
+syntax = "proto3";
+package assign4;
+
+service Database {
+    rpc AccessDB (Request) returns (Response) {}
+}
+
+message Request {
+    string req = 1;
+}
+
+message Response {
+    string res = 1;
+}
+
+service KeyValueStore {
+    // Provides a value for each key request
+    rpc GetValues (stream Request) returns (stream Response) {}
+    rpc SendAddress (Request) returns (Response) {}
+}

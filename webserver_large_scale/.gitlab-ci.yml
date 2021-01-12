@@ -1,0 +1,20 @@
+image: wjuni/ee324-assign2-base
+
+stages:
+  - build
+  - 'webserver test'
+
+before_script:
+  - "[ ! -f ./install.sh ] || bash ./install.sh || true"
+  - redis-server --daemonize yes
+ 
+build:
+  stage: build
+  script:
+    - make
+  artifacts:
+    paths:
+      - 'bin/webserver*'
+
+include:
+ - 'test/webserver.gitlab-ci.yml'
